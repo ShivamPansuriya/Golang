@@ -388,6 +388,8 @@ func dataType() {
 	}
 	var you Person
 
+	you.age = 21
+
 	fmt.Printf("%T\n", you) // => main.Person
 
 	//pointer type
