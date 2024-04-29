@@ -160,12 +160,14 @@ func Structs() {
 		name        string
 		salary      int
 		contactInfo Contact
+		arrayStruct []int
 	}
 
 	// declaring a value of type Employee
 	john := Employee{
-		name:   "John Keller",
-		salary: 3000,
+		name:        "John Keller",
+		arrayStruct: []int{1},
+		salary:      3000,
 		contactInfo: Contact{
 			email:   "jkeller@company.com",
 			address: "Street 20, London",
@@ -188,4 +190,8 @@ func Structs() {
 	john.contactInfo.email = "new_email@thecompany.com"
 
 	fmt.Printf("Employee's new email address:%s\n", john.contactInfo.email) // =>  Employee's new email address:new_email@thecompany.com
+
+	slice := []Employee{john}
+
+	fmt.Println(slice)
 }

@@ -1,31 +1,47 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
-	var map1 map[int]string   // create map with null
+	var map1 map[int]string // create map with null
+
 	fmt.Printf("%#v\n", map1) // map[int]string(nil)
 
-	var map2 = make(map[int]string) // method-2 to create map
-	fmt.Printf("%#v\n", map2)       // map[int]string{}
+	var map2 = make(map[int]string, 4) // method-2 to create map
+	map2[1] = "one"
+	map2[2] = "two"
+	fmt.Printf("%#v\n", len(map2)) // map[int]string{}
 
-	map3 := map[int]string{}  // method-3 to create map
+	map3 := map[int]string{} // method-3 to create map
+
 	fmt.Printf("%#v\n", map3) // map[int]string{}
+
+	fmt.Println(strings.Repeat("--", 20))
 
 	//map1[1] = "shivam"  --> this will give an error : [panic: assignment to entry in nil map]
 
 	map2[1] = "shivam"
 	map2[3] = "yash"
 	map2[2] = "raj"
+	map2[4] = "dhyani"
+	delete(map2, 4)
 
 	fmt.Println(map2)
+
+	fmt.Println(strings.Repeat("--", 20))
 
 	for key, value := range map2 {
 		fmt.Printf("key=%d, value=%s\n", key, value)
 		if key == 2 {
 			map2[2] = "vaibhav"
+			delete(map2, key)
 		}
 	}
+
+	fmt.Println(strings.Repeat("--", 20))
 
 	fmt.Println(map2) // map[1:shivam 2:vaibhav 3:yash]
 
@@ -37,6 +53,8 @@ func main() {
 
 	fmt.Println(map4) // map[1:shivam 2:yash 3:yash]
 
+	fmt.Println(strings.Repeat("--", 20))
+
 	map5 := map[string]float64{
 		"A": 201.4,
 		"B": 201.4,
@@ -44,6 +62,8 @@ func main() {
 	}
 
 	fmt.Println(map5)
+
+	fmt.Println(strings.Repeat("--", 20))
 
 	fmt.Println(map5["C"]) // 0
 
@@ -57,6 +77,8 @@ func main() {
 	} else {
 		fmt.Println("The RON key doesn't exist in the map!")
 	}
+
+	fmt.Println(strings.Repeat("--", 20))
 
 	map6 := map[string][]int{}
 	_ = map6

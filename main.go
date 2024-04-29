@@ -5,7 +5,11 @@ import "Golang/advance"
 func main() {
 	//advance.Structs()
 
-	advance.Method()
+	//advance.Method()
 
-	advance.MethodPointer()
+	//advance.MethodPointer()
+
+	//advance.Error()
+
+	advance.Start()
 }

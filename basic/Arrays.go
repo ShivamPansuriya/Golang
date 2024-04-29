@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"math"
+	"slices"
 	"strings"
 )
 
@@ -16,10 +18,12 @@ func main() {
 }
 
 func arrays() {
-	var arr = [5]int{1, 2, 3, 4, 5}         // any data-type on right side will work
+	var arr = [5]int{1, 2, 3, 4, 5} // any data-type on right side will work
+
 	var arr2 [5]int = [5]int{1, 2, 3, 4, 5} // data-type that is left side should be on right side
 
 	fmt.Printf("%T, %v\n", arr, arr2)
+
 	fmt.Printf("%T, %#v\n", arr2, arr2) // %#v --> also print type of variable along with data
 
 	arr3 := [...]float64{1, 2, 3, 4.345, 5} // declaring array without knowing it size
@@ -51,6 +55,7 @@ func arrays() {
 	balances := [2][3]int{
 		[3]int{5, 6, 7}, //[3]int is optional
 		{8, 9, 10},      //if we do not write this line then it will by default make array of size 3  with default value
+		// {8,9}		 //if array size != 3 then it will automatically add extra element with zero value
 	}
 
 	for _, arr := range balances {
@@ -90,7 +95,7 @@ func arrays() {
 	}
 	fmt.Println(len(names)) // -> 5
 
-	// un unkeyed element gets its index from the last keyed element
+	// un un-keyed element gets its index from the last keyed element
 	cities := [...]string{
 		5:        "Paris",
 		"London", // this is at index 6, takes next index of its above defined index
@@ -135,9 +140,9 @@ func slice() {
 	s1 := []int{1, 2, 3} //method-1
 	_ = s1
 
-	s := make([]string, 3) // method-2
+	s := make([]string, 3, 6) // method-2 (here 6 is the capacity of slice)
 
-	fmt.Printf("%#v\n", s)
+	fmt.Printf("%#v %v\n", s, cap(s))
 
 	s = append(s, "hello")
 
@@ -183,14 +188,36 @@ func slice() {
 	dst := make([]int, len(src))
 	nn := copy(dst, src)
 	dst[1] = 50
-	fmt.Println(src, dst, nn) // => [10 20 30] [10 50 30] 3
 
+	fmt.Printf("%p, --------- %v --------- %#v\n", src, cap(src), src)
+	src1 := slices.Delete(src, 0, 2) // delete
+	fmt.Printf("%p, --------- %v --------- %#v\n", src1, cap(src1), src1)
+	fmt.Println(src, dst, nn) // => [10 20 30] [10 50 30] 3
+	src[0] = 40
+	fmt.Printf("%p, --------- %v --------- %#v\n", src, cap(src), src)
+	fmt.Printf("%p\n", &src1[0])
+	fmt.Printf("%p\n", &src[0])
+	fmt.Printf("%p, --------- %v --------- %#v\n", &src1, cap(src1), *(&src1))
 	test := []int{}
 	fmt.Println(test == nil) // false
+
+	newdst := slices.Clone(dst)
+
+	newdst[0] = 0
+
+	fmt.Println(dst)
 
 	var test2 []int
 	fmt.Println(test2 == nil) // true
 
+	// cannot use nil as int value in array or slice literal
+	//nullValue := [2]int{1, nil}
+	//fmt.Println(nullValue)
 
+	//test3 := make([]int, 2147483647+100000000)
+	//fmt.Println(test3)
+
+	test3 := [math.MaxInt32 + 1000000000]int32{}
+	_ = test3
 
 }
