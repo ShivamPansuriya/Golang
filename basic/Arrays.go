@@ -13,6 +13,8 @@ func main() {
 
 	slice()
 
+	print()
+
 	//arrays()
 
 }

@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"strings"
+	"sync"
 )
 
 func main() {
@@ -88,5 +89,11 @@ func main() {
 	map7["test1"] = map5
 
 	fmt.Println(map7)
+
+	var synmap sync.Map
+
+	synmap.Store(1, "shivam")
+
+	fmt.Println(synmap.Load(2))
 
 }
